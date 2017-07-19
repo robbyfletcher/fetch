@@ -12,6 +12,10 @@ function format(data, cb) {
     state: 'TX',
     at_aac: e.at_aac,
     intake_date: Date(e.intake_date),
+    pos: {
+      lat: e.location.latitude ? parseFloat(e.location.latitude) : null,
+      lng: e.location.longitude ? parseFloat(e.location.longitude) : null,
+    },
   }));
 
   if (cb) {

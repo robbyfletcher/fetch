@@ -60,7 +60,6 @@ class List extends React.Component {
                         className="img-rounded"
                         src={d.image}
                         alt=""
-                        height="100%"
                         width="100%"
                       />
                     </Col>

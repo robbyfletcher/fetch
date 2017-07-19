@@ -5,42 +5,47 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  InfoWindow,
 } from 'react-google-maps';
 
-const SimpleMapExampleGoogleMap = withGoogleMap(props => (
-  <GoogleMap
-    defaultZoom={12}
-    defaultCenter={{ lat: props.pos.lat, lng: props.pos.lng }}
-  >
-    {props.markers.map(m => (
-      <Marker key={m.key} position={{ lat: m.lat, lng: m.lng }} />
-      ),
-    )}
-  </GoogleMap>
-));
-
-/*
- * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
- */
-const Map = props => (
-  <SimpleMapExampleGoogleMap
-    pos={props.pos}
-    markers={props.markers}
-
-    containerElement={
-      <div style={{ height: '500px' }} />
-    }
-    mapElement={
-      <div style={{ height: '500px' }} />
-    }
-  />
-);
+const Map = withGoogleMap((props) => {
+  return (
+    <GoogleMap
+      defaultZoom={12}
+      defaultCenter={props.pos}
+      containerElement={
+        <div style={{ height: '500px' }} />
+      }
+      mapElement={
+        <div style={{ height: '500px' }} />
+      }
+    >
+      {props.markers.map(m => (
+        <Marker
+          key={m.key}
+          position={{ lat: m.lat, lng: m.lng }}
+        >
+          <InfoWindow>
+            <div>
+              <strong>Content</strong>
+              <br />
+              <em>The contents of this InfoWindow are actually ReactElements.</em>
+            </div>
+          </InfoWindow>
+        </Marker>
+      ))}
+    </GoogleMap>
+  );
+});
 
 Map.propTypes = {
-  pos: PropTypes.shape({
+  defaultZoom: PropTypes.number,
+  defaultCenter: PropTypes.shape({
     lat: PropTypes.number,
     lng: PropTypes.number,
   }),
+  containerElement: PropTypes.node,
+  mapElement: PropTypes.node,
   markers: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
@@ -51,10 +56,13 @@ Map.propTypes = {
 };
 
 Map.defaultProps = {
-  pos: {
+  defaultZoom: 12,
+  defaultCenter: {
     lat: 0,
     lng: 0,
   },
+  containerElement: (<div style={{ height: '500px' }} />),
+  mapElement: (<div style={{ height: '500px' }} />),
   markers: [],
 };
 

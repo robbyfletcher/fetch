@@ -74,6 +74,7 @@ class Home extends React.Component {
             Currently only in Austin.
           </h5>
         </div>
+        <hr />
         <ResponsiveEmbed a16by9>
           <Map pos={this.state.pos} markers={this.state.markers} />
         </ResponsiveEmbed>
