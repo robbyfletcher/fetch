@@ -5,38 +5,27 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
-  InfoWindow,
 } from 'react-google-maps';
 
-const Map = withGoogleMap((props) => {
-  return (
-    <GoogleMap
-      defaultZoom={12}
-      defaultCenter={props.pos}
-      containerElement={
-        <div style={{ height: '500px' }} />
-      }
-      mapElement={
-        <div style={{ height: '500px' }} />
-      }
-    >
-      {props.markers.map(m => (
-        <Marker
-          key={m.key}
-          position={{ lat: m.lat, lng: m.lng }}
-        >
-          <InfoWindow>
-            <div>
-              <strong>Content</strong>
-              <br />
-              <em>The contents of this InfoWindow are actually ReactElements.</em>
-            </div>
-          </InfoWindow>
-        </Marker>
-      ))}
-    </GoogleMap>
-  );
-});
+const Map = withGoogleMap(props => (
+  <GoogleMap
+    defaultZoom={12}
+    defaultCenter={props.pos}
+    containerElement={
+      <div style={{ height: '500px' }} />
+    }
+    mapElement={
+      <div style={{ height: '500px' }} />
+    }
+  >
+    {props.markers.map(m => (
+      <Marker
+        key={m.key}
+        position={{ lat: m.lat, lng: m.lng }}
+      />
+    ))}
+  </GoogleMap>
+));
 
 Map.propTypes = {
   defaultZoom: PropTypes.number,
