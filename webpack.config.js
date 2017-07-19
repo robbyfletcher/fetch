@@ -11,7 +11,7 @@ module.exports = options => {
   return {
     entry: './client/index.js',
     output: {
-      path: path.resolve('dist'),
+      path: path.resolve(__dirname, 'dist'),
       filename: 'bundle.js',
     },
     devServer: {
